@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors');
+const cors = require('cors')
 const { connection } = require('./config/db');
 const { userRouter } = require('./routes/user.route');
 const { chatRouter } = require('./routes/chat.route');
@@ -28,16 +28,9 @@ const server = app.listen(4500, async() => {
   console.log("running port 4500");
 });
 
-server.prependListener("request", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-});
 
 const io = require("socket.io")(server, {
-  pingTimeout: 70000,
-  cors: {
-    origin: "https://live-chat-app-beta.vercel.app/",
-    methods: ["GET", "POST"],
-  },
+  origins: ["*"],
 });
 
 io.on("connection", (socket) => {
