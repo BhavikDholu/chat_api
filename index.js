@@ -4,14 +4,13 @@ const { connection } = require('./config/db');
 const { userRouter } = require('./routes/user.route');
 const { chatRouter } = require('./routes/chat.route');
 const { messageRouter } = require('./routes/message.route');
-const {Server} = require('socket.io')
 
 const app = express();
 
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://live-chat-app-beta.vercel.app/",
+    origin: "*",
   })
 );
 
@@ -34,9 +33,12 @@ const createServer = app.listen(4500, async() => {
 });
 
 
-const io = new Server(createServer, {
+const io = require("socket.io")(createServer, {
   cors: {
-    origin: "https://live-chat-app-beta.vercel.app/",
+    origin: [
+      "https://live-chat-app-beta.vercel.app/",
+      "https://live-chat-app-beta.vercel.app/chat/",
+    ],
   },
 });
 
