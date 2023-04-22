@@ -2,7 +2,6 @@ const express = require('express');
 const { authenticate } = require('../middlewares/authentication.middleware');
 const { ChatModel } = require('../model/chat.model');
 
-
 const chatRouter = express.Router();
 
 chatRouter.post("/create/singlechat",authenticate, async(req,res)=>{
@@ -66,7 +65,6 @@ chatRouter.post("/create/groupchat",authenticate,async(req,res)=>{
 
 chatRouter.get("/get",authenticate, async(req,res)=>{
     const {userId} = req.body;
-
     try {
         const chat = await ChatModel.find({users : userId}).populate("users").populate("Admin")
         res.send(chat)
@@ -75,7 +73,6 @@ chatRouter.get("/get",authenticate, async(req,res)=>{
         res.send({status:'error'})
     }
 })
-
 
 module.exports={
     chatRouter

@@ -5,7 +5,6 @@ const { UserModel } = require('../model/user.model');
 
 const messageRouter = express.Router();
 
-
 messageRouter.get("/receive/:id", authenticate, async(req,res)=>{
     const {id} = req.params;
      try {
