@@ -31,7 +31,7 @@ const server = app.listen(4500, async() => {
 const io = require("socket.io")(server, {
   pingTimeout: 70000,
   cors: {
-    origin: "*",
+    origin: "https://chat-api-pearl.vercel.app",
     methods: ["GET", "POST"],
   },
 });
