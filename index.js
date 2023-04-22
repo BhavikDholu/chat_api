@@ -9,7 +9,11 @@ const {Server} = require('socket.io')
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://live-chat-app-beta.vercel.app/",
+  })
+);
 
 app.get("/",(req,res)=>{
     res.send("welcome to chat app")
