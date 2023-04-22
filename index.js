@@ -31,10 +31,7 @@ const server = app.listen(4500, async() => {
 const io = require("socket.io")(server, {
   pingTimeout: 70000,
   cors: {
-    origin: "https://live-chat-app-beta.vercel.app/",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["my-custom-header"],
-    credentials: true,
+    origin: "http://localhost:3000/"
   },
 });
 
