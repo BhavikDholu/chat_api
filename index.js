@@ -4,6 +4,7 @@ const { connection } = require('./config/db');
 const { userRouter } = require('./routes/user.route');
 const { chatRouter } = require('./routes/chat.route');
 const { messageRouter } = require('./routes/message.route');
+const {Server} = require('socket.io')
 
 const app = express();
 
@@ -18,7 +19,7 @@ app.use("/user",userRouter);
 app.use("/chat",chatRouter);
 app.use("/message",messageRouter);
 
-const server = app.listen(4500, async() => {
+const createServer = app.listen(4500, async() => {
   try {
     await connection;
     console.log("connected to db");
@@ -29,8 +30,10 @@ const server = app.listen(4500, async() => {
 });
 
 
-const io = require("socket.io")(server, {
-  origins: ["*"],
+const io = new Server(createServer, {
+  cors: {
+    origin: "https://live-chat-app-beta.vercel.app/",
+  },
 });
 
 io.on("connection", (socket) => {
