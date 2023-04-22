@@ -28,10 +28,15 @@ const server = app.listen(4500, async() => {
   console.log("running port 4500");
 });
 
+server.prependListener("request", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+});
+
 const io = require("socket.io")(server, {
   pingTimeout: 70000,
   cors: {
-    origin: "*"
+    origin: "https://live-chat-app-beta.vercel.app/",
+    methods: ["GET", "POST"],
   },
 });
 
